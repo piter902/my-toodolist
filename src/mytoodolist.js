@@ -76,6 +76,13 @@ class MyToodoList extends Component {
       })
     ) 
   }
+  alldelete(){
+    if(this.state.list.length>1){
+      return <div className="delete" onClick={this.batchDelete}>批量删除</div>
+    }else {
+      return ''
+    }
+  }
   render() {
     return (
       <div className="my-toodo-list">
@@ -96,7 +103,9 @@ class MyToodoList extends Component {
             this.renderlist()
           }
         </ul>
-        <div className="delete" onClick={this.batchDelete}>批量删除</div>
+        {
+          this.alldelete()
+        }
       </div>
     );
   }
