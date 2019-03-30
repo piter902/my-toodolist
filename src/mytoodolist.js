@@ -9,10 +9,18 @@ class MyToodoList extends Component {
       inputValue:'',
       list:[]
     }
+    // 输入事件
     this.handleinput=this.handleinput.bind(this)
+    // 增加内容
     this.handleAdd=this.handleAdd.bind(this)
+    // 键盘事件
     this.keyHandler=this.keyHandler.bind(this)
+    // 批量删除
     this.batchDelete=this.batchDelete.bind(this)
+    // 删除
+    this.handleDelete=this.handleDelete.bind(this)
+    // 选择
+    this.handleSelect=this.handleSelect.bind(this)
   }
   handleinput(e){
     const inputValue=e.target.value
@@ -20,7 +28,6 @@ class MyToodoList extends Component {
       inputValue
     }))
   }
-  // 添加
   handleAdd(){
     const {list}=this.state
     if(this.state.inputValue.length>0){
@@ -35,25 +42,21 @@ class MyToodoList extends Component {
       return
     }
   }
-  // 键盘事件
   keyHandler(e){
     if(e.charCode===13){
       this.handleAdd()
     }
   }
-  // 单个删除
   handleDelete(index){
     const {list}=this.state
     list.splice(index,1)
     this.setState(()=>({list}))
   }
-  // 选择
   handleSelect(index){
     const {list}=this.state
     list[index].check=!list[index].check
     this.setState(()=>({list}))
   }
-  // 批量删除
   batchDelete(){
     let {list}=this.state
     list=list.filter(e=>{
@@ -68,14 +71,15 @@ class MyToodoList extends Component {
         return (
           <TodoItem 
             key={index} 
-            delete={this.handleDelete.bind(this)} 
-            select={this.handleSelect.bind(this)} 
+            delete={this.handleDelete} 
+            select={this.handleSelect} 
             content={ele} 
             index={index}/>
         )
       })
     ) 
   }
+  // 全部删除按钮的逻辑
   alldelete(){
     if(this.state.list.length>1){
       return <div className="delete" onClick={this.batchDelete}>批量删除</div>
