@@ -67,11 +67,11 @@ class MyToodoList extends Component {
       this.state.list.map((ele,index)=>{
         return (
           <TodoItem 
-          key={index} 
-          delete={this.handleDelete.bind(this)} 
-          select={this.handleSelect.bind(this)} 
-          content={ele} 
-          index={index}/>
+            key={index} 
+            delete={this.handleDelete.bind(this)} 
+            select={this.handleSelect.bind(this)} 
+            content={ele} 
+            index={index}/>
         )
       })
     ) 
