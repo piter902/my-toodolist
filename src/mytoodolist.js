@@ -23,7 +23,7 @@ class MyToodoList extends Component {
     this.handleSelect=this.handleSelect.bind(this)
   }
   handleinput(e){
-    const inputValue=e.target.value
+    const inputValue=this.input.value
     this.setState(()=>({
       inputValue
     }))
@@ -42,6 +42,9 @@ class MyToodoList extends Component {
       return
     }
   }
+  // shouldComponentUpdate(nextProps, nextState) {
+  //    return false
+  // }
   keyHandler(e){
     if(e.charCode===13){
       this.handleAdd()
@@ -53,6 +56,7 @@ class MyToodoList extends Component {
     this.setState(()=>({list}))
   }
   handleSelect(index){
+    // debugger
     const {list}=this.state
     list[index].check=!list[index].check
     this.setState(()=>({list}))
@@ -71,7 +75,7 @@ class MyToodoList extends Component {
         return (
           <TodoItem 
             key={index} 
-            delete={this.handleDelete} 
+            deleteItem={this.handleDelete} 
             select={this.handleSelect} 
             content={ele} 
             index={index}/>
@@ -98,6 +102,7 @@ class MyToodoList extends Component {
             value={this.state.inputValue}
             onChange={this.handleinput}
             placeholder="请输入添加内容"
+            ref={(input)=>{this.input=input}}
             onKeyPress={this.keyHandler}
             />
           <button onClick={this.handleAdd} >增加</button>
